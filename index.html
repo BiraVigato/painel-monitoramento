@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel de Monitoramento</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+        h1 { color: #2e7d32; }
+        input, button { padding: 10px; margin: 5px 0; width: 100%; }
+        .ficha { border: 1px solid #ccc; padding: 10px; margin-top: 10px; border-left: 4px solid #2e7d32; }
+    </style>
+</head>
+<body>
+    <h1>Painel de Monitoramento</h1>
+    <input type="text" id="ficha" placeholder="Número da Ficha">
+    <input type="text" id="placa" placeholder="Placa do Veículo">
+    <button onclick="adicionarFicha()">Cadastrar Ficha</button>
+    
+    <div id="lista"></div>
+
+    <script>
+        const lista = document.getElementById('lista');
+
+        function adicionarFicha() {
+            const ficha = document.getElementById('ficha').value;
+            const placa = document.getElementById('placa').value;
+            if (!ficha || !placa) return alert('Preencha todos os campos');
+            const div = document.createElement('div');
+            div.className = 'ficha';
+            div.innerHTML = `<strong>Ficha:</strong> ${ficha}<br><strong>Placa:</strong> ${placa}<br>
+            <button onclick="simularAtualizacao(this)">Simular Atualização</button>
+            <div class="status"></div>`;
+            lista.appendChild(div);
+            document.getElementById('ficha').value = '';
+            document.getElementById('placa').value = '';
+        }
+
+        function simularAtualizacao(btn) {
+            const status = btn.nextElementSibling;
+            status.innerHTML = '<span style="color: green;">Atualização detectada!</span>';
+        }
+    </script>
+</body>
+</html>
